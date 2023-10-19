@@ -4,14 +4,14 @@ const routes = [
     {
         method: "GET",
         path: "/weathers",
-        handler: controller.getFoods
+        handler: controller.getweather 
     },
     {
         method: "POST",
         path: "/weathers",
         options: {
             handler: controller.create,
-            validate: schema.postFood
+            validate: schema.weatherSchema 
         }
     }
 ];
