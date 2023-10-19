@@ -10,7 +10,7 @@ const routes = [
         method: "POST",
         path: "/weathers",
         options: {
-            handler: controller.create,
+            handler: controller.postweather,
             validate: schema.weatherSchema 
         }
     }
