@@ -1,36 +1,43 @@
 const server = require('./server');
+const mongoose = require('mongoose')
+const express = require('express');
 
+const{
+    MONGODB_USER,
+    MONGODB_PASS,
+    MONGODB_SERVER,
+    MONGODB_DATABASE
+} = process.env
 
+// Conecta ao banco de dados
+mongoose.connect(`mongodb+srv://${MONGODB_USER}:${MONGODB_PASS}@${MONGODB_SERVER}/${MONGODB_DATABASE}?retryWrites=true&w=majority`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+
+mongoose.connection.on('connected', () =>
+    console.log('=> MONGOSE! CONECTADO COM SUCESSO AO SERVIDOR')
+)
+
+mongoose.connection.on('disconnected', () =>
+    console.log('=> MONGOSE! DESCONECTADO DO SERVIDOR')
+)
+
+mongoose.connection.on('ERROR', error =>
+    console.error('*** MONGOSE! ERRO AO SE CONECTAR AO SERVIDOR: ' + error)
+)
+
+// Quando for determinar o comando de interrupção Ctrl+C 
+process.on('SIGINT', () => {
+    mongoose.connection.close(() => {
+        console.log('=> MONGOSE! desconectando...')
+        // Encerrar a aplicação sem erros
+        process.exit(0)
+    })
+})
+    
 (async () => {
     await server.start();
 
     console.log('server started ' + server.info.uri);
 })();
-
-// index.js
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
-const { MONGO_URI, PORT } = require('./config');
-
-// Conexão com o banco de dados
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-mongoose.connection.on('connected', () => {
-  console.log('Conexão com o MongoDB estabelecida com sucesso');
-});
-
-mongoose.connection.on('error', (err) => {
-  console.error('Erro na conexão com o MongoDB:', err);
-});
-
-// Inclui rotas
-const apiRouter = require('./routes/api');
-app.use('/api', apiRouter);
-
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
