@@ -1,5 +1,5 @@
-const controller = require('../controllers/weather-controller');
-const schema = require('../schema/weather-schema');
+const controller = require('./controllers/weather-controller');
+const schema = require('./schema/weather-schema');
 const routes = [
     {
         method: "GET",

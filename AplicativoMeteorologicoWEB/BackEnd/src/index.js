@@ -1,12 +1,11 @@
 const server = require('./server');
 const mongoose = require('mongoose')
-const express = require('express');
 
 const{
-    MONGODB_USER,
-    MONGODB_PASS,
-    MONGODB_SERVER,
-    MONGODB_DATABASE
+    MONGODB_USER = 'AplicativoMeteorologico',
+    MONGODB_PASS = 'appMeteorologico',
+    MONGODB_SERVER = 'cluster0.jcizewi.mongodb.net',
+    MONGODB_DATABASE = 'AppTest'
 } = process.env
 
 // Conecta ao banco de dados
@@ -35,9 +34,8 @@ process.on('SIGINT', () => {
         process.exit(0)
     })
 })
-    
-(async () => {
-    await server.start();
 
+return async () => {
+    await server.start();
     console.log('server started ' + server.info.uri);
-})();
+};

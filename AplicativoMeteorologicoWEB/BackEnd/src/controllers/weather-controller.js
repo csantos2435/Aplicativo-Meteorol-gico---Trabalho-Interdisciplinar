@@ -1,8 +1,7 @@
 const express = require('express');
-const WeatherBusiness = require('../business/weather-business');
+const weatherBusiness = require('../business/weather-business');
 
 const router = express.Router();
-const weatherBusiness = new WeatherBusiness();
 
 const getweather = async (req, res) => {
     const city = req.params.city;

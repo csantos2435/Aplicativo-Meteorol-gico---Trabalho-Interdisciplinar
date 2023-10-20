@@ -1,8 +1,6 @@
 const axios = require('axios');
 const weatherRepository = require('../repository/weather-repository');
 
-weatherRepository = new WeatherRepository();
-
 const create = async (city) => {
     try {
         const apiKey = 'YOUR_API_KEY'; // Substitua pelo seu próprio API Key
@@ -11,7 +9,7 @@ const create = async (city) => {
         if (response.data) {
           const weatherData = response.data;
           
-          await this.weatherRepository.create(city, weatherData);
+          await weatherRepository.create(city, weatherData);
   
           return weatherData;
         } else {
@@ -23,7 +21,7 @@ const create = async (city) => {
 }
 
 const find = async (city) => {
-    const data = await this.weatherRepository.find(city);
+    const data = await weatherRepository.find(city);
     return data;
 }
 
