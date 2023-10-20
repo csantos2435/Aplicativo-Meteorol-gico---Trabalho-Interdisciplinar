@@ -2,7 +2,7 @@ const server = require('./server');
 require('dotenv').config()
     
 (async () => {
-    require('./config/database')()
+    require('../config/database')()
     await server.start();
     
     console.log('server started ' + server.info.uri);
