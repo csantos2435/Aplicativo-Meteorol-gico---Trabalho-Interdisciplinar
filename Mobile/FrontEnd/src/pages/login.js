@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,21 +16,25 @@ const Login = () => {
 
   const navigation = useNavigation();
 
-  const handleLogin = () => {
-    if (email === '' && password === '') {
-      navigation.navigate('city');
-    } else {
+  const handleLogin = async () => {
+    // Recupera os dados do usuário do AsyncStorage
+    const storedUserData = await AsyncStorage.getItem('userData');
+    const userData = JSON.parse(storedUserData);
+
+    if (!userData || email !== userData.email || password !== userData.password) {
       alert('E-mail ou senha inválidos!');
+    } else {
+      navigation.navigate('city');
     }
   };
 
   const handleRegister = () => {
-      navigation.navigate('register');
+    navigation.navigate('register');
   };
 
   return (
     <View style={styles.container}>
-      <TextInput
+     <TextInput
         style={styles.input}
         placeholder="E-mail"
         value={email}
@@ -42,11 +47,11 @@ const Login = () => {
         value={password}
         onChangeText={setPassword}
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+      <TouchableOpacity style={styles.buttonLogin} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
       <Text style={styles.text}>Não possui cadastro?</Text>
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
+      <TouchableOpacity style={styles.buttonRegister} onPress={handleRegister}>
         <Text style={styles.buttonText}>Registre-se</Text>
       </TouchableOpacity>
     </View>
@@ -58,20 +63,30 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#455458',
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#fff',
     borderRadius: 5,
     padding: 10,
     marginVertical: 10,
     width: '80%',
     fontSize: 15,
+    backgroundColor: '#fff',
   },
-  button: {
-    backgroundColor: '#3498db',
-    borderRadius: 5,
+  buttonLogin: {
+    backgroundColor: '#1b292d',
+    borderRadius: 10,
+    padding: 10,
+    width: '80%',
+    alignItems: 'center',
+    marginBottom: 5,
+    marginTop: 20,
+  },
+  buttonRegister: {
+    backgroundColor: '#1b292d',
+    borderRadius: 10,
     padding: 10,
     width: '80%',
     alignItems: 'center',
@@ -84,7 +99,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     marginVertical: 10,
-    fontSize: 15,
+    fontSize: 17,
   },
 });
 

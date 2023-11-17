@@ -8,28 +8,45 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import Modal from 'react-native-modal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = () => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const navigation = useNavigation();
 
-  const handleLogin = () => {
-    if (email === '' && password === '') {
-      navigation.navigate('main');
+  const handleRegister = async () => {
+    if (name !== '' && email !== '' && password !== '') {
+      // Salva os dados do usuário no AsyncStorage
+      await AsyncStorage.setItem('userData', JSON.stringify({ name, email, password }));
+
+      setModalMessage('Registro bem-sucedido!');
+      setModalVisible(true);
     } else {
-      alert('E-mail ou senha inválidos!');
+      setModalMessage('Há campos não preenchidos. Por favor, preencha todos os campos.');
+      setModalVisible(true);
+    }
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    if (name !== '' && email !== '' && password !== '') {
+      navigation.navigate('login');
     }
   };
 
   return (
     <View style={styles.container}>
-        <TextInput
+       <TextInput
         style={styles.input}
         placeholder="Nome"
-        value={email}
-        onChangeText={setEmail}
+        value={name}
+        onChangeText={setName}
       />
       <TextInput
         style={styles.input}
@@ -44,9 +61,18 @@ const Register = () => {
         value={password}
         onChangeText={setPassword}
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+      <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Registrar</Text>
       </TouchableOpacity>
+
+      <Modal isVisible={isModalVisible} onBackdropPress={closeModal}>
+        <View style={styles.modalContent}>
+          <Text style={styles.modalText}>{modalMessage}</Text>
+          <TouchableOpacity style={styles.modalButton} onPress={closeModal}>
+            <Text style={styles.buttonText}>OK</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -56,11 +82,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#455458',
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#fff',
+    backgroundColor: '#fff',
     borderRadius: 5,
     padding: 10,
     marginVertical: 10,
@@ -68,16 +95,37 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   button: {
-    backgroundColor: '#3498db',
-    borderRadius: 5,
+    backgroundColor: '#1b292d',
+    borderRadius: 10,
     padding: 10,
     width: '80%',
     alignItems: 'center',
+    marginTop: 20,
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 18,
+  },
+
+  modalContent: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    alignItems: 'center',
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  modalButton: {
+    backgroundColor: '#1b292d',
+    borderRadius: 10,
+    padding: 10,
+    width: '80%',
+    alignItems: 'center',
+    marginTop: 20,
   },
 });
 
