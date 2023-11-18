@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../Styles/Pesquisa.css';
 import lupa from '../lupa.svg';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
+  const navigate = useNavigate();
   const [cities, setCity] = useState('');
   const [dados, setDados] = useState('');
 
@@ -13,17 +14,13 @@ const SearchBar = () => {
       const dados = await response.json();
       setDados(dados);
 
-      handleNavegacao();
+      const idCity = dados?.map((city) => city.Id)
+      
+      navigate(`/Home/${idCity}`);
     }catch (error) {
       console.error('Erro ao buscar dados:', error);
     }
   };
-
-  const handleNavegacao = () =>{
-    const idCity = dados?.map((city) => city.Id)
-    
-    history.push(`/Home/${idCity}`);
-  }
 
   return (
     <div class="pesqui">
