@@ -1,4 +1,4 @@
-const Weather = require('../models Weather')
+const Weather = require('../models/Weather')
 
 const controller = {}   
 
