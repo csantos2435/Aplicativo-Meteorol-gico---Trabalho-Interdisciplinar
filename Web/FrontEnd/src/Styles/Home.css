@@ -1,0 +1,144 @@
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(#000, rgba(14, 26, 94, 0.834));
+  }
+  
+  .centered-square {
+    width: 950px;
+    height: 800px;
+    background-color: rgba(255, 255, 255, 0.625);
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+  
+  .city-info {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 25px;
+    left: -150px;
+  }
+  
+  .location-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .weather-section {
+    font-size: 250px;
+    margin-top: 20px;
+    margin-left: -130px;
+  }
+  
+  .location-icon {
+    margin-right: 5px;
+    font-size: 30px;
+    left: -185px;
+    position: relative;
+  }
+  
+  .city-name {
+    font-size: 30px;
+    margin: 0;
+    left: -180px;
+    position: relative;
+  }
+  
+  .horizontal-line {
+    position: absolute;
+    width: 920px;
+    height: 2px;
+    background-color: #000;
+    bottom: 30;
+    top: 55px;
+    left: 170px;
+  }
+  
+  .new-line {
+    position: absolute;
+    width: 920px;
+    height: 2px;
+    background-color: #000;
+    bottom: 250px;
+    left: 170px;
+  }
+  
+  .temperature {
+    font-size: 250px;
+    margin-right: -650px;
+    margin-top: -270px;
+  }
+  
+  .weather-details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 110px;
+    left: 20px;
+  }
+  
+  .weather-detail {
+    text-align: center;
+    margin-top: -300px;
+    padding: 17px;
+    position: relative;
+    z-index: 1;
+    left: 80px;
+  }
+
+  .line{
+    position: absolute;
+    width: 920px;
+    height: 2px;
+    background-color: #000;
+    bottom: 100px;
+    left: 170px;
+    z-index: 1;
+  }
+  
+  .weather-icon {
+    font-size: 64px;
+    margin-top: -70px; /* Ajuste conforme necessário */
+    padding: 15px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .justify-content-around.mb-4.pb-3.pt-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: -80px;
+    font-size: 16px;
+  }
+
+      
+      
+  
+ 
+  
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #000;
+    border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: #000;
+  }
+  
