@@ -42,6 +42,26 @@ controller.retrieveOne = async(req, res) => {
   }
 }
 
+controller.retrieveOneCity = async(req, res) => {
+  const cityIdParametro = req.params.idCity;
+  const cityDateParametro = req.params.data;
+
+  try {
+    const result = await Weather.findOne({id_city: cityIdParametro, data: cityDateParametro}).exec();
+    
+    if(result) {
+      res.send(result)
+    }
+    else {
+      res.status(404).end()
+    }
+  }
+  catch(error) {
+    console.error(error)
+    res.status(500).send(error)
+  }
+}
+
 controller.update = async (req, res) => {
   try {
     const result = await Weather.findByIdAndUpdate(req.params.id, req.body)

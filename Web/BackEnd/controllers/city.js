@@ -26,9 +26,11 @@ controller.retrieveAll = async (req, res) => {
 }
 
 controller.retrieveOne = async(req, res) => {
-  try {
-    const result = await City.findById(req.params.id)
+  const nomeParametro = req.params.name;
 
+  try {
+    const result = await City.findOne({name: nomeParametro}).exec();
+    
     if(result) {
       res.send(result)
     }

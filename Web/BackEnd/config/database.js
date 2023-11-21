@@ -40,8 +40,8 @@ module.exports = function() {
 //      Para conectar ao Banco MongoDB seguir as seguintes etapas:
 //      -> Crie um arquivo chamado ".env" na pasta "BackEnd"
 //      -> Adicione o seguinte código no arquivo criado, para configuração da conexão ao banco:
-//          MONGODB_USER = AplicativoMeteorologico,
-//          MONGODB_PASS = appMeteorologico,
-//          MONGODB_SERVER = cluster0.jcizewi.mongodb.net,
+//          MONGODB_USER = AplicativoMeteorologico
+//          MONGODB_PASS = appMeteorologico
+//          MONGODB_SERVER = cluster0.jcizewi.mongodb.net
 //          MONGODB_DATABASE = AppTest
 //      -> Salve o arquivo, e execute o comando "npm start" no terminal

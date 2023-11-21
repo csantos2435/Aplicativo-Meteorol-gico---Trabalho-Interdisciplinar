@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const schema = mongoose.Schema({
   name: {
     type: String,
-    required: true  // Campo obigatório
+    required: true  
   },
   state: {
     type: String,

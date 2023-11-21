@@ -4,7 +4,7 @@ const controller = require('../controllers/city')
 
 router.post('/', controller.create)
 router.get('/', controller.retrieveAll)
-router.get('/:id', controller.retrieveOne)
+router.get('/:name', controller.retrieveOne)
 router.put('/:id', controller.update)
 router.delete('/:id', controller.delete)
 
