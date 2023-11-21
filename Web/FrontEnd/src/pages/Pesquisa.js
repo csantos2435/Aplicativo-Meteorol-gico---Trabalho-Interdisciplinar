@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../Styles/Pesquisa.css';
 import lupa from '../lupa.svg';
 import { useNavigate } from 'react-router-dom';
@@ -6,19 +6,10 @@ import { useNavigate } from 'react-router-dom';
 const SearchBar = () => {
   const navigate = useNavigate();
   const [cities, setCity] = useState('');
-  const [dados, setDados] = useState('');
 
   const handleGetCity = async ()=> {
-    try{
-      const response = await fetch(`http://localhost:3000/cities?name=${cities}`);
-      const dados = await response.json();
-      setDados(dados);
-
-      const idCity = dados?.map((city) => city.Id)
-      
-      navigate(`/Home/${idCity}`);
-    }catch (error) {
-      console.error('Erro ao buscar dados:', error);
+    if (cities !== ''){
+      navigate(`/Home/3/${cities}`);
     }
   };
 
