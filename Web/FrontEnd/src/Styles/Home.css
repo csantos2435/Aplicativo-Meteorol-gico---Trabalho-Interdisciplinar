@@ -2,8 +2,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background: linear-gradient(#000, rgba(14, 26, 94, 0.834));
+    background-attachment: fixed;
+    height: 140vh; 
+    background: linear-gradient(#2947b6, rgba(132, 150, 248, 0.834));
   }
   
   .centered-square {
@@ -12,10 +13,11 @@
     background-color: rgba(255, 255, 255, 0.625);
     margin: auto;
     position: absolute;
-    top: 0;
+    top: 200px;
     bottom: 0;
     right: 0;
     left: 0;
+    overflow: auto;
   }
   
   .city-info {
