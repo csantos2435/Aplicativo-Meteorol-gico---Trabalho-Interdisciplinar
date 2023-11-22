@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const schema = mongoose.Schema({
-    nome_city: {
+    name_city: {
         type: String,
         required: true  
     },
