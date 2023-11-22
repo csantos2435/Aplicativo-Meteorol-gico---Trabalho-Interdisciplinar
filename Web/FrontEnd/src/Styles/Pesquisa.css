@@ -1,17 +1,15 @@
 .pesqui{
-    margin: 0;
-    height: 100vh;
+    height: 150vh;
     width: 100vw;
-<<<<<<< HEAD
-    background: linear-gradient(#000, rgba(14, 26, 94, 0.834)) ;
-=======
+    justify-content: center;
+    display: flex;
     background: linear-gradient(#2947b6, rgba(132, 150, 248, 0.834)) ;
->>>>>>> main
+    position: fixed;
 }
 
 .search-box {
     position:absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: #000;
@@ -23,6 +21,11 @@
     align-items: center;
 }
 
+.title{
+    position: relative;
+    top: 180px;
+    align-items: center;
+}
 
 .search-txt{
     border: none;
