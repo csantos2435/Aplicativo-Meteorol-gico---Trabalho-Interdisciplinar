@@ -1,106 +1,70 @@
-/* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-// import api from '../services/api';
 import { Container, Info, Title } from './style';
 import { LineChartBicolor, LineChart } from 'react-native-gifted-charts';
 import { ScrollView, View, Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class Data extends Component {
 
-  // state = {
-  //   stars: [],
-  // };
+  state = {
+    userName: '',
+  };
 
-  // async componentDidMount() {
-  //   const {route} = this.props;
-  //   const {user} = route.params;
-  //   const response = await api.get(`users/${user.login}/starred`);
+  componentDidMount() {
+    this.loadUserData();
+  }
 
-  //   this.setState({stars: response.data});
-  // }
+  loadUserData = async () => {
+    try {
+      const userData = await AsyncStorage.getItem('userData');
+      const { name: userName } = JSON.parse(userData);
+
+      this.setState({ userName });
+    } catch (error) {
+      console.error('Error loading user data:', error);
+    }
+  };
 
   render() {
     const { route } = this.props;
-    const { cidade } = route.params;
+    const { cidade, userName, selectedCityData  } = route.params;
 
-    const data = [
-      { value: 40 },
-      { value: -10 },
-      { value: 20 },
-      { value: 35 },
-      { value: -5 },
-      { value: 20 },
-      { value: 35 },
-    ];
-    const lineData = [
-      { value: 0, dataPointText: '0' },
-      { value: 20, dataPointText: '20' },
-      { value: 18, dataPointText: '18' },
-      { value: 40, dataPointText: '40' },
-      { value: 36, dataPointText: '36' },
-      { value: 60, dataPointText: '60' },
-      { value: 54, dataPointText: '54' },
-      { value: 85, dataPointText: '85' },
-      { value: 40, dataPointText: '40' },
-      { value: 36, dataPointText: '36' },
-      { value: 60, dataPointText: '60' },
-      { value: 54, dataPointText: '54' },
-      { value: 40, dataPointText: '40' },
-      { value: 36, dataPointText: '36' },
-    ];
-    // const {route} = this.props;
-    // const {user} = route.params;
-    // const {stars} = this.state;
+    const data = selectedCityData && selectedCityData.data ? selectedCityData.data : [];
+    const lineData = selectedCityData && selectedCityData.lineData ? selectedCityData.lineData : [];
+
+    const lineData2 = selectedCityData && selectedCityData.lineData ? selectedCityData.lineData2 : [];
+    const lineData3 = selectedCityData && selectedCityData.lineData ? selectedCityData.lineData3 : [];
 
     return (
       <Container>
         <Info>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 10, color: 'white' }}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 90, color: 'white' }}>
             Cidade: {cidade}
           </Text>
-          <Text style={{ fontSize: 20, fontWeight: 'bold', marginRight: 10, color: 'white' }}>
-            Usuário: {cidade}
-          </Text>
+          {/* <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 3, color: 'white' }}>
+            Usuário: {userName}
+          </Text> */}
         </Info>
-        {/* <Header>
-          <Avatarperfil source={{uri: user.avatar}} />
-          <Nameperfil>{user.name}</Nameperfil>
-          <Bioperfil>{user.bio}</Bioperfil>
-        </Header>
-
-        <Stars
-          data={stars}
-          keyExtractor={star => String(star.id)}
-          renderItem={({item}) => (
-            <Starred>
-              <OwnerAvatar source={{uri: item.owner.avatar_url}} />
-              <Info>
-                <Title>{item.name}</Title>
-                <Author>{item.owner.login}</Author>
-              </Info>
-            </Starred>
-          )}
-        /> */}
         <ScrollView>
-          <View style={{ backgroundColor: '#1A3461', borderRadius: 20, marginBottom: 20 }}>
+          <View style={{ backgroundColor: '#fff', borderRadius: 20, marginBottom: 20 }}>
             <Text
               style={{
                 fontSize: 20,
-                color: '#fff',
+                color: '#1b292d',
                 textAlign: 'center',
                 marginTop: 15,
                 marginBottom: 15
               }}>
-              Excellent
+              Umidade
             </Text>
             <LineChart
               width={300}
-              height={130}
+              height={200}
               initialSpacing={0}
               isAnimated
               data={lineData}
-              spacing={30}
-              textColor1="yellow"
+              spacing={45}
+              textColor1="#1b292d"
               textShiftY={-8}
               textShiftX={-10}
               textFontSize={13}
@@ -114,11 +78,43 @@ export default class Data extends Component {
               color="#0BA5A4"
             />
           </View>
+          <View style={{ backgroundColor: '#fff', borderRadius: 20, marginBottom: 20 }}>
+          <Text
+              style={{
+                fontSize: 20,
+                color: '#1b292d',
+                textAlign: 'center',
+                marginTop: 15,
+                marginBottom: 15
+              }}>
+              Temperatura Min x Max
+            </Text>
+          <LineChart
+            areaChart
+            curved
+            data={lineData2}
+            data2={lineData3}
+            height={250}
+            showVerticalLines
+            spacing={44}
+            initialSpacing={0}
+            color1="skyblue"
+            color2="orange"
+            textColor1="green"
+            hideDataPoints
+            dataPointsColor1="blue"
+            dataPointsColor2="red"
+            startFillColor1="skyblue"
+            startFillColor2="orange"
+            startOpacity={0.8}
+            endOpacity={0.3}
+            />
+          </View>
           <View style={{ backgroundColor: '#fff', borderRadius: 20 }}>
-            <Text style={{ fontSize: 20, color: 'black', textAlign: 'center', marginTop: 'auto', marginBottom: 'auto' }}>Temperatura</Text>
+            <Text style={{ fontSize: 20, color: 'black', textAlign: 'center', marginTop: 'auto', marginBottom: 'auto' }}>Temperatura Média</Text>
             <LineChartBicolor
               width={300}
-              height={150}
+              height={250}
               data={data}
               areaChart
               colo
