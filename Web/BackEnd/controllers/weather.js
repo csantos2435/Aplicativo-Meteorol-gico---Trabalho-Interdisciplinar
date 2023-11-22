@@ -43,11 +43,11 @@ controller.retrieveOne = async(req, res) => {
 }
 
 controller.retrieveOneCity = async(req, res) => {
-  const cityIdParametro = req.params.idCity;
+  const cityNameParametro = req.params.nameCity;
   const cityDateParametro = req.params.data;
 
   try {
-    const result = await Weather.findOne({id_city: cityIdParametro, data: cityDateParametro}).exec();
+    const result = await Weather.findOne({name_city: cityNameParametro, data: cityDateParametro}).exec();
     
     if(result) {
       res.send(result)
