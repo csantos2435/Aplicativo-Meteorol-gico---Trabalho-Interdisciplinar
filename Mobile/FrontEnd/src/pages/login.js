@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -17,7 +16,6 @@ const Login = () => {
   const navigation = useNavigation();
 
   const handleLogin = async () => {
-    // Recupera os dados do usuário do AsyncStorage
     const storedUserData = await AsyncStorage.getItem('userData');
     const userData = JSON.parse(storedUserData);
 
