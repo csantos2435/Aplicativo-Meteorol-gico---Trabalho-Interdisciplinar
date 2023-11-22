@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -22,26 +21,12 @@ const Register = () => {
 
   const handleRegister = async () => {
     if (name !== '' && email !== '' && password !== '') {
-      // Salva os dados no banco mongodb
-      const data = {
-        name,
-        email,
-        password
-      }; 
-  
-      fetch('http://localhost:3000/users', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then((response) => {
-        //document.location.reload()
+      await AsyncStorage.setItem('userData', JSON.stringify({ name, email, password }));
 
-        setModalMessage('Registro bem-sucedido!');
-        setModalVisible(true);
-      })
+      navigation.navigate('data', { userName: name });
+
+      setModalMessage('Registro bem-sucedido!');
+      setModalVisible(true);
     } else {
       setModalMessage('Há campos não preenchidos. Por favor, preencha todos os campos.');
       setModalVisible(true);
