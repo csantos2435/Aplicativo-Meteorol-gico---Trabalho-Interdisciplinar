@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaMapMarker, FaSun, FaCloud, FaSnowflake, FaUmbrella, FaTint, FaCloudShowersHeavy, FaWind, FaSmog } from 'react-icons/fa';
 import '../Styles/Home.css';
+import { Link } from 'react-router-dom';
+
 
 function App() {
   const cidade = "SuaCidadeAqui";
@@ -9,7 +11,7 @@ function App() {
 
   const umidade = "10%";
   const pressao = "10 psi";
-  const vento = "Rajada 20 NE";
+  const vento = "Vento 20 Km";
   const posibilidadeSol = "10%";
 
   const getWeatherIcon = () => {
@@ -65,6 +67,13 @@ function App() {
                 <FaMapMarker className="location-icon" />
                 <h1 className="city-name">{cidade}</h1>
               </div>
+              <Link to="https://kessiarodrigues31.grafana.net/public-dashboards/e899469869a543c684fcb0ca4e496d1e" 
+                className="custom-button" tabIndex="0">
+                <div className="visible-content">Ver Dashboards</div>
+                <div className="hidden-content">
+                  <i className="right-arrow icon"></i>
+                </div>
+              </Link>
               <div className="horizontal-line"></div>
               <div className="weather-section">
                 {WeatherIcon && <WeatherIcon className="weather-" />}
