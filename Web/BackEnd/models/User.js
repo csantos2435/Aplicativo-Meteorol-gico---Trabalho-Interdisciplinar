@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
 const schema = mongoose.Schema({
-  user: {
+  name: {
     type: String,
-    required: true  // Campo obigatório
+    required: true  
   },
   email: {
     type: String,

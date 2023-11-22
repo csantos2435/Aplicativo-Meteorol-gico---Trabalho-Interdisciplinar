@@ -33,8 +33,8 @@ app.use('/usersIndex', usersRouter);
 const cityRouter = require('./routes/cities')
 app.use('/city', cityRouter)
 
-const usersRouter = require('./routes/users')
-app.use('/user', usersRouter)
+const userRouter = require('./routes/users')
+app.use('/user', userRouter)
 
 const weatherRouter = require('./routes/weathers')
 app.use('/weather', weatherRouter)

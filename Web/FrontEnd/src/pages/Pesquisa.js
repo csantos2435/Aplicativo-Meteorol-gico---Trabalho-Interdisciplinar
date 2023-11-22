@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import '../Styles/Pesquisa.css';
 import lupa from '../lupa.svg';
@@ -8,6 +9,28 @@ const SearchBar = () => {
         <div class="search-box">
             <input type="text" class="search-txt" placeholder="Pesquisar"/>
             <img src={lupa} alt="Descrição da Imagem" height={20} width={20} class="search-bnt"/>
+=======
+import React, { useState } from 'react';
+import '../Styles/Pesquisa.css';
+import lupa from '../lupa.svg';
+import { useNavigate } from 'react-router-dom';
+
+const SearchBar = () => {
+  const navigate = useNavigate();
+  const [cities, setCity] = useState('');
+
+  const handleGetCity = async ()=> {
+    if (cities !== ''){
+      navigate(`/Home/3/${cities}`);
+    }
+  };
+
+  return (
+    <div class="pesqui">
+        <div class="search-box">
+            <input type="text" class="search-txt" placeholder="Pesquisar" value={cities} onChange={e => setCity(e.target.value)}/>
+            <img src={lupa} alt="Descrição da Imagem" height={20} width={20} class="search-bnt" onClick={handleGetCity}/>
+>>>>>>> main
         </div>
     </div>
   );

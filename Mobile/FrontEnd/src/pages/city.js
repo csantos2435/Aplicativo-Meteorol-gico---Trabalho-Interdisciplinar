@@ -10,7 +10,7 @@ import {
   Cidade,
   Name,
   CityButton,
-  ProfileButtonText,
+  CityButtonText,
 } from './style';
 
 export default class City extends Component {
@@ -19,6 +19,21 @@ export default class City extends Component {
     users: [],
     loading: false,
   };
+
+  cidades = ["Franca", "São Paulo", "Rio de Janeiro", 'Itirapuã', 'Brasília']
+
+  renderCityButtons() {
+    return this.cidades.map((cidade, index) => (
+      <CityButton
+      borderRadius={10}
+        key={index}
+        onPress={() => {
+          this.props.navigation.navigate('data', { cidade });
+        }}>
+        <CityButtonText>dados metereológicos de {cidade}</CityButtonText>
+      </CityButton>
+    ));
+  }
 
   async componentDidMount() {
     const users = await AsyncStorage.getItem('users');
@@ -69,13 +84,7 @@ export default class City extends Component {
 
     return (
       <Container>
-
-          <CityButton
-            onPress={() => {
-              this.props.navigation.navigate('data');
-            }}>
-          <ProfileButtonText>Ver dados da cidade</ProfileButtonText>
-        </CityButton>
+        {this.renderCityButtons()}
         <List
           showsVerticalScrollIndicator={false}
           data={users}
@@ -83,13 +92,6 @@ export default class City extends Component {
           renderItem={({item}) => (
             <Cidade>
               <Name>{item.name}</Name>
-
-              <CityButton
-                onPress={() => {
-                  this.props.navigation.navigate('main', {user: item});
-                }}>
-                <ProfileButtonText>Ver dados da cidade</ProfileButtonText>
-              </CityButton>
             </Cidade>
           )}
         />

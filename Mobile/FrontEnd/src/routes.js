@@ -1,7 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Main from './pages/main';
 import Login from './pages/login';
 import Register from './pages/register';
 import City from './pages/city';
@@ -17,7 +16,7 @@ export default function Routes() {
           name="login"
           component={Login}
           options={{
-            title: 'LOGIN',
+            title: 'METEOR APP',
             headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#1b292d',
@@ -33,8 +32,9 @@ export default function Routes() {
           options={{
             title: 'REGISTRAR',
             headerTitleAlign: 'center',
+            headerTintColor: '#fff',
             headerStyle: {
-              backgroundColor: '#3498db',
+              backgroundColor: '#1b292d',
             },
             headerTitleStyle: {
               color: '#fff',
@@ -57,25 +57,12 @@ export default function Routes() {
           }}
         />
         <Stack.Screen
-          name="main"
-          component={Main}
-          options={{
-            title: 'Git VIEWER',
-            headerTitleAlign: 'center',
-            headerStyle: {
-              backgroundColor: '#1b292d',
-            },
-            headerTitleStyle: {
-              color: '#fff',
-            },
-          }}
-        />
-        <Stack.Screen
           name="city"
           component={City}
           options={{
             title: 'CIDADES',
             headerTitleAlign: 'center',
+            headerTintColor: '#fff',
             headerStyle: {
               backgroundColor: '#1b292d',
             },

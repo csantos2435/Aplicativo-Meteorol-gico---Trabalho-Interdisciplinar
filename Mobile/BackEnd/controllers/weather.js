@@ -1,4 +1,4 @@
-const Weather = require('../models Weather')
+const Weather = require('../models/Weather')
 
 const controller = {}   
 
@@ -29,6 +29,26 @@ controller.retrieveOne = async(req, res) => {
   try {
     const result = await Weather.findById(req.params.id)
 
+    if(result) {
+      res.send(result)
+    }
+    else {
+      res.status(404).end()
+    }
+  }
+  catch(error) {
+    console.error(error)
+    res.status(500).send(error)
+  }
+}
+
+controller.retrieveOneCity = async(req, res) => {
+  const cityIdParametro = req.params.idCity;
+  const cityDateParametro = req.params.data;
+
+  try {
+    const result = await Weather.findOne({id_city: cityIdParametro, data: cityDateParametro}).exec();
+    
     if(result) {
       res.send(result)
     }

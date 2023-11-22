@@ -20,6 +20,9 @@ export default class Data extends Component {
   // }
 
   render() {
+    const { route } = this.props;
+    const { cidade } = route.params;
+
     const data = [
       { value: 40 },
       { value: -10 },
@@ -51,6 +54,14 @@ export default class Data extends Component {
 
     return (
       <Container>
+        <Info>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 10, color: 'white' }}>
+            Cidade: {cidade}
+          </Text>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', marginRight: 10, color: 'white' }}>
+            Usuário: {cidade}
+          </Text>
+        </Info>
         {/* <Header>
           <Avatarperfil source={{uri: user.avatar}} />
           <Nameperfil>{user.name}</Nameperfil>
@@ -72,7 +83,7 @@ export default class Data extends Component {
         /> */}
         <ScrollView>
           <View style={{ backgroundColor: '#1A3461', borderRadius: 20, marginBottom: 20 }}>
-          <Text
+            <Text
               style={{
                 fontSize: 20,
                 color: '#fff',
@@ -84,7 +95,7 @@ export default class Data extends Component {
             </Text>
             <LineChart
               width={300}
-              height={250}
+              height={130}
               initialSpacing={0}
               isAnimated
               data={lineData}
@@ -103,11 +114,11 @@ export default class Data extends Component {
               color="#0BA5A4"
             />
           </View>
-          <View style={{ backgroundColor: '#fff', borderRadius: 20}}>
+          <View style={{ backgroundColor: '#fff', borderRadius: 20 }}>
             <Text style={{ fontSize: 20, color: 'black', textAlign: 'center', marginTop: 'auto', marginBottom: 'auto' }}>Temperatura</Text>
             <LineChartBicolor
               width={300}
-              height={250}
+              height={150}
               data={data}
               areaChart
               colo

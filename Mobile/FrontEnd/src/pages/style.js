@@ -76,16 +76,15 @@ export const Bio = styled.Text.attrs({
 `;
 
 export const CityButton = styled(RectButton)`
-  margin-top: 10px;
-  align-self: stretch;
-  background: #3498db;
+  margin-top: 50px;
+  background: #1b292d;
   justify-content: center;
   align-items: center;
-  height: 36px;
+  height: 50px;
 `;
 
-export const ProfileButtonText = styled.Text`
-    font-size: 14px;
+export const CityButtonText = styled.Text`
+    font-size: 16px;
     font-weight: bold;
     color: #fff;
     text-transform: uppercase;
@@ -141,20 +140,14 @@ export const OwnerAvatar = styled.Image`
 `;
 
 export const Info = styled.View`
-    margin-left: -10px;
-    margin-bottom: 20px;
-    margin-top: -5px;
-    flex: 1;
+    background-color: #1b292d;
+    display: flex;
     flex-direction: row;
-`;
-
-export const Title = styled.Text.attrs({
-  numberOfLines: 1,
-})`
-    font-size: 16px;
-    font-weight: bold;
-    margin: 0px 10px;
-    color: #6e7e82;
+    margin-bottom: 20px;
+    height: 40px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
 `;
 
 export const Author = styled.Text`
