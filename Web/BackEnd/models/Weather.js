@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const schema = mongoose.Schema({
-    id_city: {
+    name_city: {
         type: String,
         required: true  
     },
@@ -50,23 +50,23 @@ const schema = mongoose.Schema({
         required: true
     },
     horarioDia:{
-        12:{
+        hora12:{
             type: Number,
             required: true 
         },
-        15:{
+        hora15:{
             type: Number,
             required: true 
         },
-        19:{
+        hora19:{
             type: Number,
             required: true 
         },
-        23:{
+        hora23:{
             type: Number,
             required: true 
         },
-        4:{
+        hora4:{
             type: Number,
             required: true 
         }

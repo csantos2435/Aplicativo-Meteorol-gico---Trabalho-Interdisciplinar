@@ -1,5 +1,5 @@
 .App {
-    background-color: #000;
+    background: linear-gradient(#2947b6, rgba(132, 150, 248, 0.834)) ;
     height: 100vh;
     display: flex;
     align-items: center;

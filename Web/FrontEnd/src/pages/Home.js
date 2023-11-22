@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 function App() {
-  const cidade = "SuaCidadeAqui";
+  const cidade = "Franca";
   const temperatura = 25;
   const temperaturaAtual = `${temperatura}°C`;
 
