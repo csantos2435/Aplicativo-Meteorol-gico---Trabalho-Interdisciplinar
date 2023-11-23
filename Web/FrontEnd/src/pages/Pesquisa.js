@@ -10,6 +10,8 @@ const SearchBar = () => {
   const handleGetCity = async ()=> {
     if (cities !== ''){
       navigate(`/Home/3/${cities}`);
+    }else {
+      alert('Informe sua cidade atual!');
     }
   };
 
