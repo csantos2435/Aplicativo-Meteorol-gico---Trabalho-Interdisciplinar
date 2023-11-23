@@ -26,9 +26,11 @@ controller.retrieveAll = async (req, res) => {
 }
 
 controller.retrieveOne = async(req, res) => {
-  try {
-    const result = await User.findById(req.params.id)
+  const emailParametro = req.params.email;
 
+  try {
+    const result = await User.findOne({email: emailParametro}).exec();
+    
     if(result) {
       res.send(result)
     }
