@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaMapMarker, FaSun, FaCloud, FaSnowflake, FaUmbrella, FaTint, FaCloudShowersHeavy, FaWind, FaSmog } from 'react-icons/fa';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Bar, BarChart, Pie, PieChart, Cell } from 'recharts';
 import '../Styles/Home.css';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 const data = [
@@ -28,15 +29,46 @@ const data = [
 
 
 function App() {
-  const cidade = "Franca";
-  const temperatura = 25;
-  const temperaturaAtual = `${temperatura}°C`;
-
-  const umidade = "10%";
-  const pressao = "10 psi";
-  const vento = "Vento 20 Km";
   const posibilidadeSol = "10%";
 
+  const { cidade } = useParams();
+  const [cidadeInf, setcidadeInf] = useState('');
+  const [temperatura, setTemperatura] = useState(null);
+  const [temperaturaMax, setTemperaturaMax] = useState(null);
+  const [temperaturaMin, setTemperaturaMin] = useState(null);
+  const [umidade, setUmidade] = useState(null);
+  const [pressao, setPressao] = useState(null);
+  const [visibilidade, setVisibilidade] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dataAtual = new Date().toISOString().slice(0, 10); 
+        const response = await fetch(`http://localhost:3000/weather/${cidade}/${dataAtual}`);
+        const dadosDoBanco = await response.json();
+          
+        setcidadeInf(cidade);
+        setTemperatura(dadosDoBanco.temperatura);
+        setTemperaturaMax(dadosDoBanco.temperaturaMax);
+        setTemperaturaMin(dadosDoBanco.temperaturaMin);
+        setUmidade(dadosDoBanco.umidade);
+        setPressao(dadosDoBanco.pressao);
+        setVisibilidade(dadosDoBanco.visibilidade);
+        setLoading(false); // Indica que a carga foi concluída
+      } catch (error) {
+        console.error('Erro ao obter dados do banco:', error);
+        setLoading(false); // Indica que a carga foi concluída mesmo em caso de erro
+      }
+    };
+
+    fetchData();
+  }, [cidade]);
+
+  if (loading) {
+    return <div>Carregando...</div>;
+  }
+  
   const getWeatherIcon = () => {
     if (temperatura > 30) {
       return FaSun;
