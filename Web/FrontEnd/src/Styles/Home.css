@@ -139,6 +139,13 @@
     margin-right: -650px;
     margin-top: -300px;
   }
+
+  .tempetarure-max-min{
+    font-size: 30px;
+    margin-right: -500px;
+    padding-top: 410px;
+    position: absolute;
+  }
   
   .weather-details {
     display: flex;
@@ -152,7 +159,7 @@
   .weather-detail {
     text-align: center;
     margin-top: -300px;
-    padding: 17px;
+    padding: 40px;
     position: relative;
     z-index: 1;
     left: 80px;
@@ -190,7 +197,7 @@
     padding: 0.3rem;
     margin-right: 0.5rem;
     border-radius: 10px;
-    width: 470px;
+    width: 415px;
     height:350px;
     align-items: center;
     justify-items: center;

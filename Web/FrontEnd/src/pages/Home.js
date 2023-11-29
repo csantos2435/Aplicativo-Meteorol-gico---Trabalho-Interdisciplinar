@@ -8,8 +8,8 @@ import { useParams } from 'react-router-dom';
 
 const data = [
   { name: 'Janeiro', temperature: 12, umidade: 10, chuva: 5000 },
-  { name: 'Fevereiro', temperature: 15, umidade: 60, chuva: 6000 },
-  { name: 'Março', temperature: 20, umidade: 50, chuva: 7000 },
+  { name: 'Fevereiro', temperature: 15, umidade: 60, chuva: 6000},
+  { name: 'Março', temperature: 20, umidade: 50, chuva: 7000  },
   { name: 'Abril', temperature: 25, umidade: 20, chuva: 8000 },
   { name: 'Maio', temperature: 30, umidade: 30, chuva: 9000 },
  ];
@@ -29,9 +29,8 @@ const data = [
 
 
 function App() {
-  const posibilidadeSol = "10%";
-
-  const { cidade } = useParams();
+  // const { cidade } = useParams();
+  const cidade = "Franca";
   const [cidadeInf, setcidadeInf] = useState('');
   const [temperatura, setTemperatura] = useState(null);
   const [temperaturaMax, setTemperaturaMax] = useState(null);
@@ -40,21 +39,22 @@ function App() {
   const [pressao, setPressao] = useState(null);
   const [visibilidade, setVisibilidade] = useState(null);
   const [loading, setLoading] = useState(true);
+  const posibilidadeSol = "5%";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const dataAtual = new Date().toISOString().slice(0, 10); 
-        const response = await fetch(`http://localhost:3000/weather/${cidade}/${dataAtual}`);
+        const response = await fetch(`http://localhost:3000/weathers/${cidade}/${dataAtual}`);
         const dadosDoBanco = await response.json();
           
-        setcidadeInf(cidade);
-        setTemperatura(dadosDoBanco.temperatura);
-        setTemperaturaMax(dadosDoBanco.temperaturaMax);
-        setTemperaturaMin(dadosDoBanco.temperaturaMin);
-        setUmidade(dadosDoBanco.umidade);
-        setPressao(dadosDoBanco.pressao);
-        setVisibilidade(dadosDoBanco.visibilidade);
+        setcidadeInf(dadosDoBanco.name_city);
+        setTemperatura(dadosDoBanco.temperature);
+        setTemperaturaMax(dadosDoBanco.temperature_max);
+        setTemperaturaMin(dadosDoBanco.temperature_min);
+        setUmidade(dadosDoBanco.humidity); 
+        setPressao(dadosDoBanco.pressure);
+        setVisibilidade(dadosDoBanco.visibility);
         setLoading(false); // Indica que a carga foi concluída
       } catch (error) {
         console.error('Erro ao obter dados do banco:', error);
@@ -88,11 +88,11 @@ function App() {
       case FaSun:
         return `${posibilidadeSol}`;
       case FaTint:
-        return `${umidade}`;
+        return `${umidade} %`;
       case FaCloudShowersHeavy:
-        return `${pressao}`;
+        return `${pressao} psi`;
       case FaWind:
-        return `${vento}`;
+        return `${visibilidade} km`;
       case FaSmog:
         return `${posibilidadeSol}`;
       default:
@@ -120,7 +120,7 @@ function App() {
             <div className="city-info">
               <div className="location-section">
                 <FaMapMarker className="location-icon" />
-                <h1 className="city-name">{cidade}</h1>
+                <h1 className="city-name">{cidadeInf}</h1>
               </div>
               <Link to="https://kessiarodrigues31.grafana.net/public-dashboards/e899469869a543c684fcb0ca4e496d1e" 
                 className="custom-button" tabIndex="0">
@@ -133,7 +133,8 @@ function App() {
               <div className="weather-section">
                 {WeatherIcon && <WeatherIcon className="weather-" />}
               </div>
-              <p className="temperature">{temperaturaAtual}</p>
+              <p className="temperature">{temperatura}º</p>
+              <p className="tempetarure-max-min">Máx.: {temperaturaMax}º | Mín.: {temperaturaMin}º</p>
               <div className="new-line"></div>
               <div className="weather-details">
                 {weatherIcons.map((Icon, index) => (
