@@ -27,6 +27,11 @@ const data = [
   { value: 0, color: '#000000' },
  ];
 
+  const RainAnimation = () => (
+  <div className="rain-animation">
+      <FaCloudShowersHeavy className="rain-drop" />
+  </div>
+  );
 
 function App() {
   // const { cidade } = useParams();
@@ -66,7 +71,7 @@ function App() {
   }, [cidade]);
 
   if (loading) {
-    return <div>Carregando...</div>;
+    return <RainAnimation/>;
   }
   
   const getWeatherIcon = () => {
